@@ -63,7 +63,7 @@ Not only the probability of not having the same key will rise (of 10000 iteratio
 
 Quantum communication will be based on two quantum basis: the computational basis \|0\> and \|1\>, and the Hadamard basis 1/sqrt(2)\*(\|0\> + \|1\>) and 1/sqrt(2)\*(\|0\> - \|1\>). When a Quantum user generates a random bit associated with these basis we choose 0 as the computational basis and 1 as the Hadamard basis.
 
-When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Identity gate at the computational basis. |0> and 1/sqrt(2)\*(|0> + |1>) are interpretated as 
+When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Identity gate at the computational basis. |0> and 1/sqrt(2)\*(|0> + |1>) are interpretated as bit 0 and |1> and 1/sqrt(2)\*(|0> - |1>) are interpretated as bit 1.
 
 - Alice and Bob publicly agree upon a number N, this number should be at least 2 times the key length that they expect to get. They also agree who will be the sender and who will be the receiver.
 - Alice generates N random bits (using a Quantum random generator, at the best scenario, but she can use a pseudo-random generator like /dev/random) and maps them to Quantum basis.
