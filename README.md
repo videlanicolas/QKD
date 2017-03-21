@@ -61,7 +61,7 @@ Not only the probability of not having the same key will rise (of 10000 iteratio
 
 ## Quantum Mechanics explanation
 
-Quantum communication will be based on two quantum basis: the computational basis |0> and |1>, and the Hadamard basis 1/sqrt(2)\*(|0> + |1>) and 1/sqrt(2)\*(|0> - |1>). When a Quantum user generates a random bit associated with these basis we choose 0 as the computational basis and 1 as the Hadamard basis.
+Quantum communication will be based on two quantum basis: the computational basis \|0\> and \|1\>, and the Hadamard basis 1/sqrt(2)\*(\|0\> + \|1\>) and 1/sqrt(2)\*(\|0\> - \|1\>). When a Quantum user generates a random bit associated with these basis we choose 0 as the computational basis and 1 as the Hadamard basis.
 
 When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Identity gate at the computational basis. |0> and 1/sqrt(2)\*(|0> + |1>) are interpretated as 
 
@@ -71,10 +71,10 @@ When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Ident
 	
 -	Basis | Bits | State
 	------| -----|-----
-	0     | 0    | |0>
-	0     | 1    | |1>
-	1     | 1    | 1/sqrt(2)\*(|0> + |1>)
-	1     | 1    | 1/sqrt(2)\*(|0> - |1>)
+	0     | 0    | \|0\>
+	0     | 1    | \|1\>
+	1     | 1    | 1/sqrt(2)\*(\|0\> + \|1\>)
+	1     | 1    | 1/sqrt(2)\*(\|0\> - \|1\>)
 - Bob generates N random bits and maps them to their quantum basis.
 - Bob measured the received Qubits from Alice with his basis, he then gets the measured bits.
 - Alice and Bob exchange publicly their basis and compare them locally.
