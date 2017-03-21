@@ -68,7 +68,8 @@ When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Ident
 - Alice and Bob publicly agree upon a number N, this number should be at least 2 times the key length that they expect to get. They also agree who will be the sender and who will be the receiver.
 - Alice generates N random bits (using a Quantum random generator, at the best scenario, but she can use a pseudo-random generator like /dev/random) and maps them to Quantum basis.
 - Alice generates N random bits and creates the required states using the previous random basis. She then sends these Qubits through the quantum channel (i.e. Fibre Optic with polarized Photons) So:
-	Basis | Bits | State
+	
+-	Basis | Bits | State
 	------| -----|-----
 	0     | 0    | |0>
 	0     | 1    | |1>
@@ -79,15 +80,3 @@ When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Ident
 - Alice and Bob exchange publicly their basis and compare them locally.
 - Alice and Bob drop the bits where their basis doesn't match, the remaining bits will be the agreed key. If the key length is may below N/2 then they consider a MITM attack happened.
 - Alice sends and encrypted "Hello" message to Bob with that key. If Bob can't decrypt the message with his key then a MITM ocurred (or decoherence), otherwise they have their key for encryption.
-
-The Quantum circuits used here are very simple:
-
-For the Computational basis Alice uses the Identity gate:
-    [1 0]
-I = [0 1]
-
-For the Hadamard basis Alice uses the Hadamard gate:
-    [1  1]
-H = [1 -1]
-
-Bob uses these same gates to decode the Qubits.
