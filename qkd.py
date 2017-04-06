@@ -2,7 +2,7 @@
 from numpy import matrix
 from math import pow, sqrt
 from random import randint
-import sys
+import sys, argparse
 
 class qubit():
 	def __init__(self,initial_state):
@@ -87,7 +87,7 @@ def generate_random_bits(N):
 		aux.append(randint(0,1))
 	return aux
 
-def QKD(N,silent=False,eve_present=False):
+def QKD(N,verbose=False,eve_present=False):
 	alice_basis = generate_random_bits(N)
 	alice_bits = generate_random_bits(N)
 	alice = quantum_user("Alice")
@@ -109,11 +109,13 @@ def QKD(N,silent=False,eve_present=False):
 	if alice_key != bob_key:
 		key = False
 		length = None
+		print "Encription key mismatch, eve is present."
 	else:
 		key = True
 		length = len(bob_key)
+		print "Successfully exchanged key!"
 		print "Key Length: " + str(length)
-	if not silent:
+	if verbose:
 		print "Alice generates {0} random basis.".format(str(N))
 		raw_input()
 		print ''.join(str(e) for e in alice_basis)
@@ -153,8 +155,28 @@ def QKD(N,silent=False,eve_present=False):
 	return key
 
 if __name__ == "__main__":
+	parser = argparse.ArgumentParser(description='BB84 QKD demonstration with Python.')
+	requiredNamed = parser.add_argument_group('Required arguments')
+	optionalNamed = parser.add_argument_group('Optional arguments')
+	requiredNamed.add_argument('-q','--qubits', required=True, help='Number of Qubits.')
+	optionalNamed.add_argument('-i','--iterate',required=False, help='Number of iterations.')
+	optionalNamed.add_argument('-e','--eve', action='store_true',default=False,required=False, help='Is EVE present?')
+	optionalNamed.add_argument('-v','--verbose', action='store_true',default=False,required=False, help='Verbose logs.')
+	args = parser.parse_args()
+	assert int(args.qubits)
 	ret = list()
-	for i in range(10000):
-		ret.append(QKD(int(sys.argv[1]),silent=True,eve_present=True))
-	print "True: {0}".format(ret.count(True))
-	print "False: {0}".format(ret.count(False))
+	if args.iterate:
+		assert int(args.iterate)
+		N = int(args.iterate)
+	else:
+		N = 1
+	for i in range(N):
+		print "############# {0} #############".format(str(i))
+		ret.append(QKD(int(args.qubits),verbose=args.verbose,eve_present=args.eve))
+		print "###############################".format(str(i))
+	print "############################"
+	print "############################"
+	t = "{0:.2f}".format(float(ret.count(True))*100.0/float(N))
+	u = "{0:.2f}".format(float(ret.count(False))*100.0/float(N))
+	print "True: {0} <{1}%>".format(ret.count(True),str(t))
+	print "False: {0} <{1}%>".format(ret.count(False),str(u))
