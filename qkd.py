@@ -131,7 +131,7 @@ def QKD(N,verbose=False,eve_present=False):
 			aux += q.show() + "   "
 		print aux
 		raw_input()
-		if eve:
+		if eve_present:
 			print "Eve intercepts Qubits!"
 			raw_input()
 			print ''.join(str(e) for e in eve_basis)
