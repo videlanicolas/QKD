@@ -54,7 +54,7 @@ def user_feedback(
         input()
         print("Bob receives and decodes Alice's Qubits.")
         input()
-        print("".join(str(e) for e in bob.bits))
+        print("".join(str(e) for e in bob.data))
         input()
         print(
             "Alice and Bob interchange basis through Internet and compare their basis."
@@ -145,7 +145,6 @@ if __name__ == "__main__":
         print(f"############# {i} #############")
         ret.append(QKD(int(args.qubits), verbose=args.verbose, eve_present=args.eve))
         print(SEPARATOR)
-    print(SEPARATOR)
     print(SEPARATOR)
     t = f"{float(ret.count(True)) * 100.0 / float(N):.2f}"
     u = f"{float(ret.count(False)) * 100.0 / float(N):.2f}"
