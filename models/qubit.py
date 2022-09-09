@@ -5,6 +5,11 @@ from numpy import matrix
 
 
 class QuBit:
+    __H = matrix
+    __state: matrix
+    __measured: bool
+    __X = matrix
+
     def __init__(self, initial_state):
         if initial_state:
             self.__state = matrix(

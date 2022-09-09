@@ -1,2 +1,2 @@
-from quantumuser import QuantumUser
-from qubit import QuBit
+from models.quantumagent import QuantumAgent
+from models.qubit import QuBit
