@@ -59,22 +59,22 @@ False: 9981
 
 Not only the probability of not having the same key will rise (of 10000 iterations, Alice and Bob could not agree 9981 times), but the 19 times they could agree upon a key the size of that key is on average lower than 50/2 = 25. This should alert them that Eve is present.
 
-## Quantum Mechanics explanation
+## BB84 Protocol
 
-Quantum communication will be based on two quantum basis: the computational basis \|0\> and \|1\>, and the Hadamard basis 1/sqrt(2)\*(\|0\> + \|1\>) and 1/sqrt(2)\*(\|0\> - \|1\>). When a Quantum user generates a random bit associated with these basis we choose 0 as the computational basis and 1 as the Hadamard basis.
+Quantum communication will be based on two quantum basis: the computational basis $ \ket 0 $ and $ \ket 1 $, and the Hadamard basis ${1 \over \sqrt 2}( \ket 0 + \ket 1 ) $ and ${1 \over \sqrt 2}( \ket 0 - \ket 1 ) $. When a Quantum user generates a random bit associated with these basis we choose 0 as the computational basis and 1 as the Hadamard basis.
 
-When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Identity gate at the computational basis. |0> and 1/sqrt(2)\*(|0> + |1>) are interpreted as bit 0 and |1> and 1/sqrt(2)\*(|0> - |1>) are interpreted as bit 1.
+When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Identity gate at the computational basis. $\ket 0$ and ${1 \over \sqrt 2}( \ket 0  + \ket 1 ) $ are interpreted as bit 0 and $\ket 1$ and ${1 \over \sqrt 2}( \ket 0 - \ket 1 ) $ are interpreted as bit 1.
 
 - Alice and Bob publicly agree upon a number N, this number should be at least 2 times the key length that they expect to get. They also agree who will be the sender and who will be the receiver.
 - Alice generates N random bits (using a Quantum random generator, at the best scenario, but she can use a pseudo-random generator like /dev/random) and maps them to Quantum basis.
 - Alice generates N random bits and creates the required states using the previous random basis. She then sends these Qubits through the quantum channel (i.e. Fibre Optic with polarized Photons) So:
 	
--	Basis | Bits | State
-	------| -----|-----
-	0     | 0    | \|0\>
-	0     | 1    | \|1\>
-	1     | 1    | 1/sqrt(2)\*(\|0\> + \|1\>)
-	1     | 1    | 1/sqrt(2)\*(\|0\> - \|1\>)
+	Basis	| Bit	| State
+	:------:|:-----:|:-----:
+	0		| 0		| $ \ket 0 $
+	0		| 1		| $ \ket 1 $
+	1		| 1		| $ {1 \over \sqrt 2}(\ket 0 + \ket 1) $
+	1		| 1		| $ {1 \over \sqrt 2}(\ket 0 - \ket 1) $
 - Bob generates N random bits and maps them to their quantum basis.
 - Bob measured the received Qubits from Alice with his basis, he then gets the measured bits.
 - Alice and Bob exchange publicly their basis and compare them locally.
