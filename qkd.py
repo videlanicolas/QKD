@@ -2,8 +2,17 @@
 import argparse
 from random import randint
 
+import numpy as np
 from models import QuantumAgent
+from models.databeam import DataStream, Beam
+from sympy import pprint, symbols
+from sympy.core.numbers import (I, pi)
 
+from sympy.physics.optics.polarization import (mueller_matrix,
+    linear_polarizer, half_wave_retarder, stokes_vector, phase_retarder, quarter_wave_retarder)
+from sympy.physics.optics.gaussopt import (RayTransferMatrix, FreeSpace, FlatRefraction,
+        CurvedRefraction, FlatMirror, CurvedMirror, ThinLens, GeometricRay,
+        BeamParameter, waist2rayleigh, rayleigh2waist)
 
 SEPARATOR = "############################"
 
@@ -106,6 +115,36 @@ def QKD(N, verbose=False, eve_present=False):
     )
 
     return alice_key == bob_key
+
+def eom_transfer_matrix():
+    return FlatRefraction(n_eom, n_air) * \
+            FreeSpace(len_eom) * \
+            FlatRefraction(n_air, n_eom)
+
+def telescope_transfer_matrix():
+    return 
+
+def eom_mueller_matrix(theta):
+    return mueller_matrix(phase_retarder(0, theta))
+
+def alice_optical_path(base, bit):    
+    bit_states = [0, pi, pi/2, 3*pi/2] # V, H, L, R
+    eom = eom_mueller_matrix(bit_states[base << 1 | bit])
+    vertical_polarizer = mueller_matrix(linear_polarizer(pi / 2))
+    hwp = mueller_matrix(half_wave_retarder(pi / 8))
+    return hwp * eom * hwp * vertical_polarizer
+
+
+def issue_key(key, base_word):
+    data = DataStream([0 for _ in range(len(key))])
+    for i in range(len(key)):
+        beam = Beam(parameter=BeamParameter(830e-9, 0, 1e-3))
+        bit, base = int(key[i]), int(base_word[i])
+        beam.polarization = alice_optical_path(bit, base) * beam.polarization
+        data.data[i] = beam
+        pprint(beam.polarization)
+    
+    return data
 
 
 if __name__ == "__main__":

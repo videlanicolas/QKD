@@ -59,7 +59,7 @@ False: 9981
 
 Not only the probability of not having the same key will rise (of 10000 iterations, Alice and Bob could not agree 9981 times), but the 19 times they could agree upon a key the size of that key is on average lower than 50/2 = 25. This should alert them that Eve is present.
 
-## BB84 Protocol
+## BB84
 
 Quantum communication will be based on two quantum basis: the computational basis $ \ket 0 $ and $ \ket 1 $, and the Hadamard basis ${1 \over \sqrt 2}( \ket 0 + \ket 1 ) $ and ${1 \over \sqrt 2}( \ket 0 - \ket 1 ) $. When a Quantum user generates a random bit associated with these basis we choose 0 as the computational basis and 1 as the Hadamard basis.
 
@@ -80,3 +80,7 @@ When measured, we apply Hadamard gate on the Hadamard basis Qubits and the Ident
 - Alice and Bob exchange publicly their basis and compare them locally.
 - Alice and Bob drop the bits where their basis doesn't match, the remaining bits will be the agreed key. If the key length is may below N/2 then they consider a Man in the middle (MITM) attack happened.
 - Alice sends and encrypted "Hello" message to Bob with that key. If Bob can't decrypt the message with his key then a MITM ocurred (or decoherence), otherwise they have their key for encryption.
+
+## 3 State 1 Decoy
+
+We have implemented a simulated free space version of the setup described in [Simple and high-speed polarization-based QKD](https://aip.scitation.org/doi/10.1063/1.5016931).
